@@ -1,0 +1,24 @@
+{"level":30,"time":1765165434548,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: Anthropic (endpoint: /v1/messages)"}
+{"level":30,"time":1765165434549,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: gemini (endpoint: /v1beta/models/:modelAndAction)"}
+{"level":30,"time":1765165434549,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: vertex-gemini (no endpoint)"}
+{"level":30,"time":1765165434549,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: vertex-claude (no endpoint)"}
+{"level":30,"time":1765165434550,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: deepseek (no endpoint)"}
+{"level":30,"time":1765165434550,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: tooluse (no endpoint)"}
+{"level":30,"time":1765165434550,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: openrouter (no endpoint)"}
+{"level":30,"time":1765165434550,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: OpenAI (endpoint: /v1/chat/completions)"}
+{"level":30,"time":1765165434550,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: maxtoken (no endpoint)"}
+{"level":30,"time":1765165434550,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: groq (no endpoint)"}
+{"level":30,"time":1765165434550,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: cleancache (no endpoint)"}
+{"level":30,"time":1765165434550,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: enhancetool (no endpoint)"}
+{"level":30,"time":1765165434550,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: reasoning (no endpoint)"}
+{"level":30,"time":1765165434550,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: sampling (no endpoint)"}
+{"level":30,"time":1765165434551,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: maxcompletiontokens (no endpoint)"}
+{"level":30,"time":1765165434551,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: cerebras (no endpoint)"}
+{"level":30,"time":1765165434551,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: streamoptions (no endpoint)"}
+{"level":30,"time":1765165434551,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: customparams (no endpoint)"}
+{"level":30,"time":1765165434551,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: vercel (no endpoint)"}
+{"level":30,"time":1765165434551,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: openai-responses (endpoint: /v1/responses)"}
+{"level":30,"time":1765165434551,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"register transformer: forcereasoning (no endpoint)"}
+{"level":30,"time":1765165434568,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"gemini provider registered"}
+{"level":30,"time":1765165434665,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"Server listening at http://127.0.0.1:3456"}
+{"level":30,"time":1765165434665,"pid":11796,"hostname":"DESKTOP-TKMASPS","msg":"🚀 LLMs API server listening on http://127.0.0.1:3456"}
