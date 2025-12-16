@@ -1,80 +1,69 @@
 <!-- SYNC IMPACT REPORT
-Version change: N/A (initial version) → 1.0.0
-Modified principles: N/A (new constitution)
-Added sections: All sections (new document)
+Version change: N/A -> 1.0.0
+Modified principles: N/A
+Added sections: All principles per user requirements
 Removed sections: N/A
-Templates requiring updates: 
-- ✅ plan-template.md: Updated
-- ✅ spec-template.md: Updated  
-- ✅ tasks-template.md: Updated
-- ✅ README.md: Updated
-Deferred items: None
+Templates requiring updates:
+- .specify/templates/plan-template.md ⚠ pending
+- .specify/templates/spec-template.md ⚠ pending
+- .specify/templates/tasks-template.md ⚠ pending
+- .specify/templates/commands/*.md ⚠ pending
+Templates needing no changes: None
+Follow-up TODOs: [RATIFICATION_DATE]: Original adoption date needs to be set
 -->
-# AI-native Software Development Research Paper Constitution
+
+# Research Paper on AI-Native Software Development Constitution
 
 ## Core Principles
 
-### Accuracy through Primary Source Verification
-All factual claims must be traceable to credible sources; Each assertion requires verification against peer-reviewed literature or official documentation; No speculation without proper attribution.
+### I. Accuracy through Primary Source Verification
+Every claim, fact, and assertion in the research paper must be supported by primary sources; All data points, statistics, and findings must be traceable to original publications; Accuracy must be prioritized over efficiency when conducting literature reviews.
 
-### Clarity for Academic Audience
-Written content targets computer science professionals with clear explanations; Technical concepts explained with accessible language appropriate for Flesch-Kincaid grade 10-12 level; Complex ideas broken into digestible sections with examples where appropriate.
+### II. Clarity for Academic Audience
+All writing must target computer science professionals and researchers; Technical concepts should be explained with precision and appropriate terminology; Accessibility to readers with computer science background but potentially limited domain expertise should be maintained.
 
-### Reproducibility through Proper Documentation
-All claims and methodologies must be fully documented with step-by-step procedures; Sources and citations follow standardized format to enable replication; Research methodology clearly outlined with sufficient detail for reproducibility.
+### III. Reproducibility
+All claims, data, and methodologies referenced must be properly documented to enable verification; Proper citation of sources should allow others to replicate literature searches and fact-checking; Research methodology must be transparent and reproducible.
 
-### Rigor through Peer-Reviewed Standards
-Minimum 50% of sources must be peer-reviewed articles or academic publications; Claims validated through cross-referencing multiple authoritative sources; Methodology follows established academic research protocols.
+### IV. Rigor through Peer-Reviewed Sources
+Priority must be given to peer-reviewed articles, conference proceedings, and academic journals; Theoretical frameworks should be grounded in validated research literature; Expert testimony and grey literature may supplement but never replace peer-reviewed sources.
 
-### Integrity through Originality
-Zero tolerance for plagiarism with comprehensive checks before submission; All borrowed ideas properly attributed; Self-plagiarism avoided even with author's own prior work.
+### V. Fact-Traceability (NON-NEGOTIABLE)
+Every factual statement must be linked to a verifiable source; Claims must maintain a clear chain of custody from original research to paper content; Unverified claims or opinions must be explicitly labeled as such.
 
-### Completeness through Comprehensive Coverage
-Minimum 15 sources required to support arguments; Word count maintained between 5,000-7,000 words; All major aspects of AI-native software development covered with evidence-based arguments.
+### VI. Zero-Tolerance for Academic Dishonesty
+All content must undergo plagiarism detection before submission; Paraphrasing must maintain accuracy while avoiding copy-paste; Proper attribution must be given for all intellectual contributions, regardless of format.
 
-## Standards for Research Quality
+## Standards and Constraints
 
-### Citation Standards
-All sources cited in APA format consistently throughout the paper; Bibliography includes only cited works; Both in-text citations and reference list maintained with precision.
+### Writing and Citation Standards
+- All factual claims must be traceable to reliable sources
+- Citation format must follow APA style guidelines
+- At least 50% of sources must be peer-reviewed articles
+- Zero tolerance for plagiarism before submission
+- Writing clarity must maintain Flesch-Kincaid grade level 10-12
 
-### Source Quality Requirements
-Minimum 50% of sources must be peer-reviewed articles from academic journals; Conference papers from reputable venues acceptable; Industry reports and whitepapers allowed only when no academic equivalent available; Personal blogs and informal sources prohibited.
+### Research Scope Constraints
+- Word count must remain between 5,000-7,000 words
+- Minimum of 15 sources required
+- Final format must be PDF with embedded citations
+- Submission deadline must align with conference/journal requirements
 
-### Content Quality Standards
-Writing clarity maintained at Flesch-Kincaid grade 10-12 level; Technical accuracy verified by domain experts when possible; All diagrams and figures properly labeled and referenced; All tables formatted consistently following academic standards.
+## Success Criteria and Quality Gates
 
-## Research Constraints and Requirements
+### Pre-Publication Verification
+- All claims must be verified against original sources
+- Zero plagiarism must be detected by scanning tools
+- Paper must pass fact-checking review by subject matter experts
+- Peer review process must be completed successfully
 
-### Formatting Requirements
-Final submission in PDF format with embedded citations; Font: Times New Roman 12pt for body text; Double-spacing maintained throughout document; Page numbers, headers, and footers formatted according to guidelines.
-
-### Submission Criteria
-Word count must fall within 5,000-7,000 words inclusive of bibliography; At least 15 sources cited in the reference list; Zero percent plagiarism tolerance as measured by institutional detection tools; All claims must be supported by verifiable sources.
-
-### Quality Gates
-Pass plagiarism check before submission; All factual claims verified against original sources; Citations formatted correctly in APA style; All figures and tables properly attributed and formatted.
-
-## Success Criteria and Validation
-
-### Acceptance Criteria
-All claims verified against reliable sources with proper citations; Zero plagiarism detected by institutional checking tools; Paper passes fact-checking review by academic peers; Meets word count and source count requirements.
-
-### Quality Assurance Process
-At least two independent reviewers verify factual accuracy; Plagiarism checker validates originality; Editor reviews for clarity and formatting compliance; Final proofreading conducted to eliminate grammatical errors.
-
-### Publication Readiness
-Document formatted according to academic standards; All figures and tables properly embedded; Reference list complete and compliant with APA format; All sections contribute meaningfully to research objectives.
+### Post-Publication Monitoring
+- Errata process must be established for corrections
+- Impact metrics should be tracked post-publication
+- Updates to information must be planned for future editions if applicable
 
 ## Governance
 
-This constitution governs all aspects of the AI-native software development research paper creation process. All contributors must familiarize themselves with these principles and follow them strictly.
+All research activities must comply with this constitution; Amendments to these principles require documentation of rationale and impact assessment; Research integrity violations must be reported following institutional policies; Literature reviews and fact-checking must be conducted systematically to ensure quality.
 
-Amendments to this constitution require:
-- Justification for proposed changes
-- Review by lead researcher
-- Approval by research team consensus
-- Update to all dependent documents
-
-Quality compliance reviews will be conducted at each milestone to ensure adherence to these principles. All sections of the paper must pass constitution compliance checks before final submission.
-
-**Version**: 1.0.0 | **Ratified**: 2025-01-15 | **Last Amended**: 2025-12-07
+**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE) | **Last Amended**: 2025-12-11

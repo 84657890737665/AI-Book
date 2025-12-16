@@ -1,0 +1,383 @@
+openapi: 3.0.0
+info:
+  title: Physical AI Robot Control API
+  description: API for controlling humanoid robots in the Physical AI & Humanoid Robotics Hackathon
+  version: 1.0.0
+servers:
+  - url: http://robot.local:8080
+    description: Local robot control server
+paths:
+  /robot/status:
+    get:
+      summary: Get the current status of the robot
+      responses:
+        '200':
+          description: Robot status information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  robot_id:
+                    type: string
+                    description: Unique identifier of the robot
+                  status:
+                    type: string
+                    enum: [connected, disconnected, error, charging]
+                    description: Current status of the robot
+                  battery_level:
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 100
+                    description: Battery level as percentage
+                  current_task:
+                    type: string
+                    description: Description of current task being executed
+                  timestamp:
+                    type: string
+                    format: date-time
+                    description: Time of status measurement
+
+  /robot/move:
+    post:
+      summary: Command the robot to move to a specific position
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                x:
+                  type: number
+                  format: float
+                  description: X coordinate in meters
+                y:
+                  type: number
+                  format: float
+                  description: Y coordinate in meters
+                z:
+                  type: number
+                  format: float
+                  description: Z coordinate in meters (height)
+                orientation:
+                  type: object
+                  properties:
+                    x:
+                      type: number
+                      format: float
+                    y:
+                      type: number
+                      format: float
+                    z:
+                      type: number
+                      format: float
+                    w:
+                      type: number
+                      format: float
+                  description: Quaternion orientation
+              required:
+                - x
+                - y
+      responses:
+        '200':
+          description: Move command accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  execution_id:
+                    type: string
+                    description: Unique ID for tracking this command execution
+        '400':
+          description: Invalid move command
+        '500':
+          description: Robot execution error
+
+  /robot/manipulate:
+    post:
+      summary: Command the robot to manipulate an object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum: [pick, place, grasp, release, move_gripper]
+                  description: Type of manipulation action
+                object_id:
+                  type: string
+                  description: ID of object to manipulate (if applicable)
+                position:
+                  type: object
+                  properties:
+                    x:
+                      type: number
+                      format: float
+                    y:
+                      type: number
+                      format: float
+                    z:
+                      type: number
+                      format: float
+                  description: Position to perform manipulation
+                gripper_position:
+                  type: number
+                  format: float
+                  minimum: 0
+                  maximum: 100
+                  description: Gripper position as percentage (0=open, 100=closed)
+              required:
+                - action
+      responses:
+        '200':
+          description: Manipulation command accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  execution_id:
+                    type: string
+        '400':
+          description: Invalid manipulation command
+        '500':
+          description: Robot execution error
+
+  /robot/perception/objects:
+    get:
+      summary: Get list of objects detected by perception system
+      responses:
+        '200':
+          description: List of detected objects
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        object_id:
+                          type: string
+                        object_type:
+                          type: string
+                          description: Type/classification of the object
+                        position:
+                          type: object
+                          properties:
+                            x:
+                              type: number
+                              format: float
+                            y:
+                              type: number
+                              format: float
+                            z:
+                              type: number
+                              format: float
+                        confidence:
+                          type: number
+                          format: float
+                          minimum: 0
+                          maximum: 1
+                        timestamp:
+                          type: string
+                          format: date-time
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /robot/perception/scan:
+    post:
+      summary: Perform environment scan and return spatial map
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scan_type:
+                  type: string
+                  enum: [vslam, lidar, stereo_camera]
+                  default: vslam
+                resolution:
+                  type: number
+                  format: float
+                  description: Desired resolution in meters
+                duration:
+                  type: number
+                  format: float
+                  description: Duration of scan in seconds
+      responses:
+        '200':
+          description: Spatial map data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scan_id:
+                    type: string
+                  map_format:
+                    type: string
+                    enum: [occupancy_grid, point_cloud, mesh]
+                  data:
+                    type: string
+                    format: binary
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /robot/voice/command:
+    post:
+      summary: Send voice command to robot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                audio_data:
+                  type: string
+                  format: byte
+                  description: Base64-encoded audio data
+                language:
+                  type: string
+                  default: en-US
+                  description: Language code for speech recognition
+      responses:
+        '200':
+          description: Voice command processed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  recognized_text:
+                    type: string
+                    description: Text recognized from speech
+                  interpreted_action:
+                    type: string
+                    description: Action interpreted from the voice command
+                  execution_id:
+                    type: string
+                    description: ID for tracking the action execution
+                  processing_time_ms:
+                    type: number
+                    format: int32
+                    description: Time taken to process the command in milliseconds
+        '400':
+          description: Invalid audio data or command
+        '408':
+          description: Timeout - response latency requirement not met
+        '500':
+          description: Processing error
+
+  /robot/log:
+    get:
+      summary: Get robot system logs
+      parameters:
+        - name: level
+          in: query
+          schema:
+            type: string
+            enum: [debug, info, warning, error]
+            default: info
+          description: Log level filter
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          description: Maximum number of log entries to return
+        - name: since
+          in: query
+          schema:
+            type: string
+            format: date-time
+          description: Filter logs from this time onwards
+      responses:
+        '200':
+          description: Robot logs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  logs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        timestamp:
+                          type: string
+                          format: date-time
+                        level:
+                          type: string
+                          enum: [debug, info, warning, error]
+                        component:
+                          type: string
+                          description: Component that generated the log
+                        message:
+                          type: string
+                        context:
+                          type: object
+                          description: Additional context for the log entry
+                  total_count:
+                    type: integer
+
+  /robot/actions/{actionId}/status:
+    get:
+      summary: Get status of a specific robot action
+      parameters:
+        - name: actionId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the action
+      responses:
+        '200':
+          description: Action status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  action_id:
+                    type: string
+                  status:
+                    type: string
+                    enum: [idle, active, preempted, succeeded, aborted, rejected]
+                  progress:
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 1
+                    description: Progress percentage
+                  result:
+                    type: object
+                    description: Result data if action completed
+                  error:
+                    type: string
+                    description: Error message if action failed

@@ -1,0 +1,212 @@
+.features {
+  padding: 4rem 0;
+  width: 100%;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  position: relative;
+}
+
+.features::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(96, 165, 250, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.featureSvg {
+  height: 150px;
+  width: 150px;
+  filter: drop-shadow(0 0 15px rgba(96, 165, 250, 0.5));
+}
+
+
+/* Futuristic feature card design */
+.featureCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(96, 165, 250, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin: 1.5rem 0.5rem;
+  border: 1px solid rgba(96, 165, 250, 0.2);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Glassmorphism effect */
+.featureCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    linear-gradient(145deg, rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.4)),
+    radial-gradient(circle at 20% 30%, rgba(96, 165, 250, 0.1) 0%, transparent 50%);
+  z-index: -1;
+  border-radius: 16px;
+  transition: all 0.4s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-10px) scale(1.03) translateZ(20px);
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(96, 165, 250, 0.3);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+.featureCard:hover::before {
+  background:
+    linear-gradient(145deg, rgba(30, 64, 175, 0.4), rgba(79, 70, 229, 0.3)),
+    radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.2) 0%, transparent 50%);
+}
+
+.featureIcon {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.emojiIcon {
+  font-size: 4rem;
+  display: block;
+  margin: 0 auto 1rem;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.7));
+  position: relative;
+}
+
+.emojiIcon::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.3) 0%, transparent 70%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.featureCard:hover .emojiIcon {
+  transform: scale(1.2) translateY(-5px) rotate(5deg);
+  filter: drop-shadow(0 0 20px rgba(96, 165, 250, 0.9));
+}
+
+.featureCard:hover .emojiIcon::after {
+  opacity: 1;
+}
+
+.featureTitle {
+  color: #eff6ff; /* Light blue-white for contrast */
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+}
+
+.featureTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #60a5fa, #8b5cf6);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.featureCard:hover .featureTitle::after {
+  width: 70%;
+}
+
+.featureDescription {
+  color: #cbd5e1; /* Light gray for readability */
+  line-height: 1.7;
+  font-size: 1rem;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.featureContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 996px) {
+  .features {
+    padding: 3rem 0;
+  }
+
+  .featureCard {
+    margin: 1rem 0.5rem;
+    padding: 2rem 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .featureCard {
+    padding: 1.75rem 1rem;
+    margin: 1rem 0.25rem;
+  }
+
+  .featureTitle {
+    font-size: 1.35rem;
+  }
+
+  .featureDescription {
+    font-size: 0.95rem;
+  }
+
+  .emojiIcon {
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .features {
+    padding: 2rem 0;
+  }
+
+  .featureCard {
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .emojiIcon {
+    font-size: 3rem;
+  }
+}
