@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "website",
+=======
+  "name": "physical-ai-textbook",
+>>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -15,8 +19,13 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@docusaurus/core": "^3.9.2",
     "@docusaurus/preset-classic": "^3.9.2",
+=======
+    "@docusaurus/core": "3.9.2",
+    "@docusaurus/preset-classic": "3.9.2",
+>>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
@@ -24,9 +33,15 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@docusaurus/module-type-aliases": "^3.9.2",
     "@docusaurus/tsconfig": "^3.9.2",
     "@docusaurus/types": "^3.9.2",
+=======
+    "@docusaurus/module-type-aliases": "3.9.2",
+    "@docusaurus/tsconfig": "3.9.2",
+    "@docusaurus/types": "3.9.2",
+>>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
     "typescript": "~5.6.2"
   },
   "browserslist": {
