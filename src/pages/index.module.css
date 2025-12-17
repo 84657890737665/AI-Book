@@ -1,9 +1,4 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
 
-<<<<<<< HEAD
 /* Futuristic Hero Section */
 .heroBanner {
   padding: 6rem 0;
@@ -16,7 +11,7 @@
     radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
   color: white;
   min-height: 80vh;
-=======
+
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
@@ -31,12 +26,10 @@
 }
 
 .buttons {
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
   display: flex;
   align-items: center;
   justify-content: center;
 }
-<<<<<<< HEAD
 
 .heroContent {
   display: flex;
@@ -302,5 +295,3 @@
     padding: 3rem 1rem;
   }
 }
-=======
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
