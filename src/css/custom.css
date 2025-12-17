@@ -1,5 +1,4 @@
-/**
-<<<<<<< HEAD
+
  * Custom CSS for Physical AI & Humanoid Robotics Textbook
  */
 
@@ -1078,11 +1077,6 @@
     font-size: 1.3rem;
   }
 }
-=======
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
 
 /* You can override the default Infima variables here. */
 :root {
@@ -1107,5 +1101,4 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-}
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
+} 
