@@ -5,19 +5,13 @@ import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-<<<<<<< HEAD
   Svg?: React.ComponentType<React.ComponentProps<'svg'>>;
   description: ReactNode;
   icon?: string; // For emoji icons
-=======
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
-  description: ReactNode;
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
 };
 
 const FeatureList: FeatureItem[] = [
   {
-<<<<<<< HEAD
     title: 'Physical AI Fundamentals',
     icon: '🧠',
     description: (
@@ -25,19 +19,10 @@ const FeatureList: FeatureItem[] = [
         Understand the core principles of embodied intelligence and how AI systems
         operate in physical environments through sensing, reasoning, and action.
         Explore the fundamentals of real-world interaction and adaptive behavior.
-=======
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    description: (
-      <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
       </>
     ),
   },
   {
-<<<<<<< HEAD
     title: 'Humanoid Control Systems',
     icon: '⚙️',
     description: (
@@ -45,19 +30,10 @@ const FeatureList: FeatureItem[] = [
         Master the architecture of humanoid robotics control, including motion planning,
         kinematics, dynamics, and real-time control systems that enable natural movement.
         Learn how to implement stable and efficient locomotion patterns.
-=======
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    description: (
-      <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
       </>
     ),
   },
   {
-<<<<<<< HEAD
     title: 'Sensors & Actuators',
     icon: '📡',
     description: (
@@ -98,45 +74,24 @@ const FeatureList: FeatureItem[] = [
         Examine the ethical implications of humanoid robots in society and the
         future trajectory of the field. Address safety, privacy, and societal
         impact considerations for responsible deployment of embodied AI.
-=======
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
       </>
     ),
   },
 ];
 
-<<<<<<< HEAD
 function Feature({title, Svg, description, icon}: FeatureItem) {
-  return (
-    <div className={clsx('col', styles.featureCard)}>
-      <div className={clsx('text--center', styles.featureIcon)}>
-        
-        {icon ? (
-          <span className={styles.emojiIcon}>{icon}</span>
-        ) : Svg ? (
-          <Svg className={styles.featureSvg} role="img"/>
-        ) : null}
-      </div>
-      <div className={clsx('padding-horiz--md', styles.featureContent)}>
-        <Heading as="h3" className={styles.featureTitle}>{title}</Heading>
-        <p className={styles.featureDescription}>{description}</p>
-=======
-function Feature({title, Svg, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        {icon ? (
+          <span className={styles.emojiIcon}>{icon}</span>
+        ) : Svg ? (
+          <Svg className={styles.featureSvg} role="img" />
+        ) : null}
       </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
       </div>
     </div>
   );
@@ -144,11 +99,7 @@ function Feature({title, Svg, description}: FeatureItem) {
 
 export default function HomepageFeatures(): ReactNode {
   return (
-<<<<<<< HEAD
-    <section className={clsx(styles.features, 'padding-vert--lg')}>
-=======
     <section className={styles.features}>
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
       <div className="container">
         <div className="row">
           {FeatureList.map((props, idx) => (
@@ -158,8 +109,4 @@ export default function HomepageFeatures(): ReactNode {
       </div>
     </section>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
