@@ -1,0 +1,40 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.38  0 0 0 0 0.64  0 0 0 0 0.98  0 0 0 0.5 0"/>
+    </filter>
+  </defs>
+  
+  <!-- Outer circle with glow -->
+  <circle cx="150" cy="150" r="140" fill="url(#bgGradient)" filter="url(#glow)"/>
+  
+  <!-- Dark inner circle -->
+  <circle cx="150" cy="150" r="120" fill="#0f172a"/>
+  
+  <!-- Robot head outline -->
+  <rect x="90" y="90" width="120" height="120" rx="20" stroke="#60a5fa" stroke-width="4" fill="none"/>
+  
+  <!-- Eyes -->
+  <circle cx="120" cy="130" r="12" fill="#8b5cf6"/>
+  <circle cx="180" cy="130" r="12" fill="#8b5cf6"/>
+  
+  <!-- Connection lines (neural network style) -->
+  <path d="M150 160 L150 200" stroke="#60a5fa" stroke-width="3" stroke-dasharray="5,5"/>
+  <path d="M150 200 L120 230" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4,4"/>
+  <path d="M150 200 L180 230" stroke="#60a5fa" stroke-width="2" stroke-dasharray="4,4"/>
+  
+  <!-- Antenna -->
+  <line x1="150" y1="70" x2="150" y2="50" stroke="#60a5fa" stroke-width="4"/>
+  <circle cx="150" cy="45" r="5" fill="#8b5cf6"/>
+  
+  <!-- Circuit pattern -->
+  <path d="M100 190 Q120 180 140 190" stroke="#60a5fa" stroke-width="1" fill="none"/>
+  <path d="M160 190 Q180 180 200 190" stroke="#60a5fa" stroke-width="1" fill="none"/>
+  <path d="M130 210 Q150 200 170 210" stroke="#60a5fa" stroke-width="1" fill="none"/>
+</svg>
