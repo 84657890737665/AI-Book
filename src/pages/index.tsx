@@ -5,7 +5,6 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
-<<<<<<< HEAD
 import Chatbot from '@site/src/components/Chatbot/Chatbot';
 
 import styles from './index.module.css';
@@ -13,7 +12,6 @@ import styles from './index.module.css';
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
-<<<<<<< HEAD
     <header className={clsx(styles.heroBanner)}>
       <div className="container">
         <div className={styles.heroContent}>
@@ -129,4 +127,3 @@ export default function Home(): ReactNode {
     </Layout>
   );
 }
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
