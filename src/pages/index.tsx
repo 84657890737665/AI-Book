@@ -7,8 +7,6 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 <<<<<<< HEAD
 import Chatbot from '@site/src/components/Chatbot/Chatbot';
-=======
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
 
 import styles from './index.module.css';
 
@@ -46,7 +44,6 @@ function HomepageHeader() {
               className={styles.robotImage}
             />
           </div>
-=======
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
         <Heading as="h1" className="hero__title">
@@ -59,14 +56,12 @@ function HomepageHeader() {
             to="/docs/intro">
             Docusaurus Tutorial - 5min ⏱️
           </Link>
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
         </div>
       </div>
     </header>
   );
 }
 
-<<<<<<< HEAD
 function BookOverview() {
   return (
     <section className={styles.bookOverview}>
@@ -110,13 +105,10 @@ function BookOverview() {
   );
 }
 
-=======
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
 export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-<<<<<<< HEAD
       title={`Physical AI & Humanoid Robotics`}
       description="Comprehensive guide to building intelligent systems that operate in physical space">
       <HomepageHeader />
@@ -128,7 +120,6 @@ export default function Home(): ReactNode {
     </Layout>
   );
 }
-=======
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
       <HomepageHeader />
