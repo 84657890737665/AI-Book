@@ -210,7 +210,7 @@
     font-size: 3rem;
   }
 }
-=======
+.featureRow {
   display: flex;
   align-items: center;
   padding: 2rem 0;
