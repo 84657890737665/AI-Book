@@ -169,18 +169,13 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
 
   plugins: [
-    function cssMinifierConfig() {
+    function disableCssMinify() {
       return {
-        name: 'css-minifier-config',
+        name: 'disable-css-minify',
         configureWebpack() {
-          const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
           return {
             optimization: {
-              minimizer: [
-                new CssMinimizerPlugin({
-                  parallel: false, // This is key for deployment platforms
-                }),
-              ],
+              minimize: false,
             },
           };
         },
