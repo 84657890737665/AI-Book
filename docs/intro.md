@@ -2,7 +2,6 @@
 sidebar_position: 1
 ---
 
-<<<<<<< HEAD
 # Physical AI & Humanoid Robotics Textbook
 
 <div class="text--center padding--lg">
@@ -212,4 +211,3 @@ The `cd` command changes the directory you're working with. In order to work wit
 The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
 
 Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
->>>>>>> d85aeea8c5d135ba5736162a0277cbb7f9b0a54a
