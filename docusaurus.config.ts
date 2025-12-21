@@ -167,6 +167,26 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
+
+  plugins: [
+    function cssMinifierConfig() {
+      return {
+        name: 'css-minifier-config',
+        configureWebpack() {
+          const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+          return {
+            optimization: {
+              minimizer: [
+                new CssMinimizerPlugin({
+                  parallel: false, // This is key for deployment platforms
+                }),
+              ],
+            },
+          };
+        },
+      };
+    },
+  ],
 };
 
 export default config;
