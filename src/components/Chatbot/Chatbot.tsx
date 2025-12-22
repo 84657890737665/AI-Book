@@ -30,7 +30,7 @@ const Chatbot = () => {
 
     try {
       // Call the backend API to get the response
-      const response = await fetch('http://localhost:8000/query/physical-ai-textbook', {
+      const response = await fetch('https://tan-ee320-rag-chatbot.hf.space/docs#/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
