@@ -30,7 +30,7 @@ const Chatbot = () => {
 
     try {
       // Call the backend API to get the response
-      const response = await fetch('https://tan-ee320-rag-chatbot.hf.space/docs#/', {
+      const response = await fetch('https://tan-ee320-rag-chatbot.hf.space/api/ask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
