@@ -1,27 +1,61 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './Chatbot.module.css';
 
-const Chatbot = () => {
+interface Message {
+  id: number;
+  text: string;
+  sender: 'user' | 'bot';
+}
+
+interface ContextAwareChatbotProps {
+  pageContext?: string; // Pass the current page/module context
+}
+
+const ContextAwareChatbot: React.FC<ContextAwareChatbotProps> = ({ pageContext = '' }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<{id: number, text: string, sender: 'user' | 'bot'}[]>([
-    { id: 1, text: 'Hello! I\'m Tan, your AI Assistant for Physical AI & Humanoid Robotics. How can I help you today?', sender: 'bot' }
+  const [messages, setMessages] = useState<Message[]>([
+    { id: 1, text: 'Hello! I\'m your AI Assistant for Physical AI & Humanoid Robotics. How can I help you with this page?', sender: 'bot' }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedText, setSelectedText] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
   };
 
+  // Function to handle text selection
+  const handleTextSelection = () => {
+    const selectedTextObj = window.getSelection();
+    if (selectedTextObj && selectedTextObj.toString().trim() !== '') {
+      setSelectedText(selectedTextObj.toString().trim());
+    }
+  };
+
+  // Set up text selection event listener
+  useEffect(() => {
+    const handleMouseUp = () => {
+      handleTextSelection();
+    };
+
+    document.addEventListener('mouseup', handleMouseUp);
+    return () => {
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, []);
+
   const handleSend = async () => {
     if (inputValue.trim() === '' || isLoading) return;
 
+    // Use selected text in the query if available
+    const queryText = selectedText ? `${inputValue} (about: "${selectedText}")` : inputValue;
+
     // Add user message
-    const newUserMessage = {
+    const newUserMessage: Message = {
       id: messages.length + 1,
-      text: inputValue,
-      sender: 'user' as const
+      text: inputValue, // Show the original input to user
+      sender: 'user'
     };
 
     setMessages(prev => [...prev, newUserMessage]);
@@ -36,9 +70,10 @@ const Chatbot = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          query: inputValue,
+          query: queryText, // Include selected text in the query
           mode: 'FULL_BOOK', // Default mode
-          selected_text: null
+          selected_text: selectedText,
+          context: pageContext || null // Add page context if available
         })
       });
 
@@ -49,21 +84,22 @@ const Chatbot = () => {
       const data = await response.json();
 
       // Add bot response
-      const botResponse = {
+      const botResponse: Message = {
         id: messages.length + 2,
         text: data.response,
-        sender: 'bot' as const
+        sender: 'bot'
       };
 
       setMessages(prev => [...prev, botResponse]);
+      setSelectedText(null); // Clear selected text after sending
     } catch (error) {
       console.error('Error calling backend API:', error);
 
       // Add error message
-      const errorMessage = {
+      const errorMessage: Message = {
         id: messages.length + 2,
         text: 'Sorry, I encountered an error while processing your request. Please try again.',
-        sender: 'bot' as const
+        sender: 'bot'
       };
 
       setMessages(prev => [...prev, errorMessage]);
@@ -87,6 +123,19 @@ const Chatbot = () => {
   return (
     <>
       {/* Floating Chatbot Button */}
+      {selectedText && (
+        <div 
+          className={styles.quickAskButton} 
+          onClick={() => {
+            setInputValue(`Ask about: "${selectedText}"`);
+            setIsOpen(true);
+            setSelectedText(null);
+          }}
+        >
+          <span>💬 Ask about this</span>
+        </div>
+      )}
+      
       <div className={styles.chatbotButton} onClick={toggleChat}>
         <div className={styles.chatbotIcon}>
           <svg
@@ -198,4 +247,4 @@ const Chatbot = () => {
   );
 };
 
-export default Chatbot;
+export default ContextAwareChatbot;

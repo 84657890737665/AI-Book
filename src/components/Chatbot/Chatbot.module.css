@@ -237,6 +237,48 @@
   box-shadow: 0 0 15px rgba(96, 165, 250, 0.5);
 }
 
+/* Quick ask button that appears when text is selected */
+.quickAskButton {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow:
+    0 4px 20px rgba(59, 130, 246, 0.4),
+    0 0 20px rgba(96, 165, 250, 0.3);
+  z-index: 1001;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: fadeInSlide 0.3s ease;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.quickAskButton:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 25px rgba(59, 130, 246, 0.6),
+    0 0 30px rgba(96, 165, 250, 0.5);
+}
+
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .chatbotPanel {
@@ -246,15 +288,22 @@
     bottom: 80px;
     height: 400px;
   }
-  
+
   .chatbotButton {
     bottom: 20px;
     left: 20px;
     width: 50px;
     height: 50px;
   }
-  
+
   .message {
     max-width: 90%;
+  }
+
+  .quickAskButton {
+    top: 5px;
+    right: 5px;
+    font-size: 0.75rem;
+    padding: 6px 12px;
   }
 }

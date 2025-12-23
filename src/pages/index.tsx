@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import ModuleCards from '@site/src/components/ModuleCards';
 import Heading from '@theme/Heading';
 import Chatbot from '@site/src/components/Chatbot/Chatbot';
 
@@ -100,8 +100,9 @@ export default function Home(): ReactNode {
       <HomepageHeader />
       <main>
         <BookOverview />
-        <HomepageFeatures />
+        <ModuleCards />
       </main>
+      {/* Keep the original chatbot on homepage as well */}
       <Chatbot />
     </Layout>
   );
