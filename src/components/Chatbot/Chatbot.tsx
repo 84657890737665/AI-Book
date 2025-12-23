@@ -8,24 +8,48 @@ const Chatbot = () => {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedText, setSelectedText] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Handle text selection
+  useEffect(() => {
+    const handleTextSelection = () => {
+      const selectedTextObj = window.getSelection();
+      if (selectedTextObj && selectedTextObj.toString().trim() !== '') {
+        setSelectedText(selectedTextObj.toString().trim());
+      } else {
+        setSelectedText(null);
+      }
+    };
+
+    document.addEventListener('mouseup', handleTextSelection);
+    return () => {
+      document.removeEventListener('mouseup', handleTextSelection);
+    };
+  }, []);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSend = async () => {
-    if (inputValue.trim() === '' || isLoading) return;
+  const handleSend = async (customQuery?: string) => {
+    const query = customQuery || inputValue;
+    if (query.trim() === '' || isLoading) return;
 
     // Add user message
     const newUserMessage = {
       id: messages.length + 1,
-      text: inputValue,
+      text: customQuery ? `About "${selectedText}": ${query}` : query,
       sender: 'user' as const
     };
 
     setMessages(prev => [...prev, newUserMessage]);
-    setInputValue('');
+
+    // Only clear the input if not sending a custom query (like from selected text)
+    if (!customQuery) {
+      setInputValue('');
+    }
+
     setIsLoading(true);
 
     try {
@@ -36,9 +60,9 @@ const Chatbot = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          query: inputValue,
+          query: query,
           mode: 'FULL_BOOK', // Default mode
-          selected_text: null
+          selected_text: selectedText // Send the selected text context
         })
       });
 
@@ -56,6 +80,10 @@ const Chatbot = () => {
       };
 
       setMessages(prev => [...prev, botResponse]);
+      // Clear selected text after successful submission
+      if (selectedText) {
+        setSelectedText(null);
+      }
     } catch (error) {
       console.error('Error calling backend API:', error);
 
@@ -86,6 +114,20 @@ const Chatbot = () => {
 
   return (
     <>
+      {/* Quick Ask Button - appears when text is selected */}
+      {selectedText && (
+        <div
+          className={styles.quickAskButton}
+          onClick={() => {
+            // Prepopulate input with selected text and prompt user
+            setInputValue(`Ask about: "${selectedText}"`);
+            setIsOpen(true); // Open the chatbot
+          }}
+        >
+          💬 Ask AI Assistant
+        </div>
+      )}
+
       {/* Floating Chatbot Button */}
       <div className={styles.chatbotButton} onClick={toggleChat}>
         <div className={styles.chatbotIcon}>
