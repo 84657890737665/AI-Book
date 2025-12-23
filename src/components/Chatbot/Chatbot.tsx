@@ -39,7 +39,7 @@ const Chatbot = () => {
     // Add user message
     const newUserMessage = {
       id: messages.length + 1,
-      text: customQuery ? `About "${selectedText}": ${query}` : query,
+      text: customQuery && selectedText && !query.includes(selectedText) ? `About "${selectedText}": ${query}` : query,
       sender: 'user' as const
     };
 
@@ -119,9 +119,28 @@ const Chatbot = () => {
         <div
           className={styles.quickAskButton}
           onClick={() => {
-            // Prepopulate input with selected text and prompt user
-            setInputValue(`Ask about: "${selectedText}"`);
-            setIsOpen(true); // Open the chatbot
+            // Prepopulate input with selected text, open the chatbot, and automatically send the query
+            const query = `Ask about: "${selectedText}"`;
+            setInputValue(query);
+            setIsOpen(true);
+
+            // Automatically send the query after a slight delay to allow the chat to open
+            setTimeout(() => {
+              handleSend(query);
+              // Focus on the input field after sending
+              const chatInput = document.querySelector(`.${styles.chatInput}`);
+              if (chatInput) {
+                chatInput.focus();
+              }
+
+              // Also scroll to the chat panel to bring it into view
+              setTimeout(() => {
+                const chatPanel = document.querySelector(`.${styles.chatbotPanel}`);
+                if (chatPanel) {
+                  chatPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+              }, 150); // Additional delay to ensure the panel is rendered
+            }, 300);
           }}
         >
           💬 Ask AI Assistant
@@ -200,7 +219,7 @@ const Chatbot = () => {
               className={styles.chatInput}
               disabled={isLoading}
             />
-            <button onClick={handleSend} className={styles.sendButton} disabled={isLoading}>
+            <button onClick={() => handleSend()} className={styles.sendButton} disabled={isLoading}>
               {isLoading ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
