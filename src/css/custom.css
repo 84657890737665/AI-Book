@@ -12,6 +12,145 @@
   --ifm-color-primary-lighter: #4fa1ff;
   --ifm-color-primary-lightest: #6bb5ff;
   --ifm-code-font-size: 95%;
+
+  /* Enhanced readability variables */
+  --ifm-font-color-base: #1e293b; /* Darker text for better readability on light backgrounds */
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #f8fafc;
+}
+
+/* Dark mode specific variables */
+html[data-theme='dark'] {
+  --ifm-font-color-base: #e2e8f0; /* Lighter text for dark backgrounds */
+  --ifm-background-color: #0f172a;
+  --ifm-background-surface-color: #1e293b;
+}
+
+/* Apply improved readability settings throughout the site */
+body {
+  color: var(--ifm-font-color-base);
+}
+
+/* Ensure text readability in main content areas */
+.main-wrapper {
+  color: var(--ifm-font-color-base);
+}
+
+/* Improve readability of documentation content */
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  color: var(--ifm-font-color-base);
+}
+
+.markdown p,
+.markdown ul,
+.markdown ol,
+.markdown dl,
+.markdown pre,
+.markdown code,
+.markdown blockquote,
+.markdown table {
+  color: var(--ifm-font-color-base);
+}
+
+/* Ensure code blocks maintain good contrast */
+.prism-code {
+  color: #e2e8f0 !important;
+  background-color: #1e293b !important;
+}
+
+html[data-theme='light'] .prism-code {
+  color: #334155 !important;
+  background-color: #f1f5f9 !important;
+}
+
+/* Improve sidebar readability */
+.menu {
+  background-color: var(--ifm-background-surface-color);
+}
+
+.menu__list-item-collapsible {
+  background-color: transparent;
+}
+
+.menu__link {
+  color: var(--ifm-font-color-base);
+}
+
+.menu__link:hover {
+  color: var(--ifm-color-primary-lighter);
+}
+
+/* Ensure navbar text is readable */
+.navbar__title,
+.navbar__link {
+  color: var(--ifm-font-color-base);
+}
+
+html[data-theme='dark'] .navbar__title,
+html[data-theme='dark'] .navbar__link {
+  color: #eff6ff;
+}
+
+/* Footer readability */
+.footer {
+  color: var(--ifm-font-color-base);
+}
+
+/* Better contrast for headings */
+html[data-theme='light'] h1,
+html[data-theme='light'] h2,
+html[data-theme='light'] h3,
+html[data-theme='light'] h4 {
+  color: #0f172a;
+}
+
+html[data-theme='dark'] h1,
+html[data-theme='dark'] h2,
+html[data-theme='dark'] h3,
+html[data-theme='dark'] h4 {
+  color: #f8fafc;
+}
+
+/* Improve readability of alert blocks */
+.alert {
+  color: var(--ifm-font-color-base);
+}
+
+/* Ensure links maintain readability */
+.markdown a {
+  color: var(--ifm-color-primary-light);
+}
+
+html[data-theme='dark'] .markdown a {
+  color: var(--ifm-color-primary-lighter);
+}
+
+/* Improve general text readability */
+.markdown {
+  line-height: 1.7;
+}
+
+/* Enhanced color for emphasis */
+.markdown strong {
+  color: var(--ifm-font-color-base);
+}
+
+/* Improve contrast for inline code */
+.markdown code {
+  background-color: rgba(55, 65, 81, 0.05);
+  color: #dc2626; /* Red for better visibility in light mode */
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+html[data-theme='dark'] .markdown code {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fca5a5; /* Light red for dark mode */
 }
 
 /* Enhanced gradient backgrounds for hero section */
