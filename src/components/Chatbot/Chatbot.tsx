@@ -11,7 +11,7 @@ const Chatbot = () => {
   const [selectedText, setSelectedText] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Handle text selection
+  // Handle text selection for both desktop and mobile
   useEffect(() => {
     const handleTextSelection = () => {
       const selectedTextObj = window.getSelection();
@@ -22,9 +22,17 @@ const Chatbot = () => {
       }
     };
 
+    // Add event listeners for both desktop and mobile
     document.addEventListener('mouseup', handleTextSelection);
+    document.addEventListener('touchend', handleTextSelection);
+
+    // Also listen for selectionchange event which works on both platforms
+    document.addEventListener('selectionchange', handleTextSelection);
+
     return () => {
       document.removeEventListener('mouseup', handleTextSelection);
+      document.removeEventListener('touchend', handleTextSelection);
+      document.removeEventListener('selectionchange', handleTextSelection);
     };
   }, []);
 
