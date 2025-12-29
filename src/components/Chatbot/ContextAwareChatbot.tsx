@@ -14,7 +14,7 @@ interface ContextAwareChatbotProps {
 const ContextAwareChatbot: React.FC<ContextAwareChatbotProps> = ({ pageContext = '' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { id: 1, text: 'Hello! I\'m your AI Assistant for Physical AI & Humanoid Robotics. How can I help you with this page?', sender: 'bot' }
+    { id: 1, text: 'Hello! I\'m Tan, your AI Assistant for Physical AI & Humanoid Robotics. How can I help you with this page?', sender: 'bot' }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -64,7 +64,7 @@ const ContextAwareChatbot: React.FC<ContextAwareChatbotProps> = ({ pageContext =
 
     try {
       // Call the backend API to get the response
-      const response = await fetch('https://tan-ee320-rag-chatbot.hf.space', {
+      const response = await fetch('https://tan-ee320-chatbot.hf.space', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

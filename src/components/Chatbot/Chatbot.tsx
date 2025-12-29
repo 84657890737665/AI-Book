@@ -62,7 +62,7 @@ const Chatbot = () => {
 
     try {
       // Call the backend API to get the response
-      const response = await fetch('https://tan-ee320-rag-chatbot.hf.space', {
+      const response = await fetch('https://tan-ee320-chatbot.hf.space', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -136,7 +136,7 @@ const Chatbot = () => {
             setTimeout(() => {
               handleSend(query);
               // Focus on the input field after sending
-              const chatInput = document.querySelector(`.${styles.chatInput}`);
+              const chatInput = document.querySelector(`.${styles.chatInput}`) as HTMLInputElement | null;
               if (chatInput) {
                 chatInput.focus();
               }
@@ -222,7 +222,7 @@ const Chatbot = () => {
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyPress}
               placeholder="Ask about Physical AI or Humanoid Robotics..."
               className={styles.chatInput}
               disabled={isLoading}
