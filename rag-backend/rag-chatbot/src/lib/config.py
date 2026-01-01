@@ -38,7 +38,10 @@ class Config:
         missing_vars = [var for var in required_vars if not getattr(cls, var)]
 
         if missing_vars:
-            raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
+            error_msg = f"Missing required environment variables: {', '.join(missing_vars)}"
+            if os.getenv("SPACE_ID"):  # Detect Hugging Face Spaces environment
+                error_msg += ". Please add these as Secrets in your Hugging Face Space Settings."
+            raise ValueError(error_msg)
 
     @classmethod
     def validate_api_key_format(cls):

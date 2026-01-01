@@ -17,8 +17,9 @@ import numpy as np
 from dotenv import load_dotenv
 
 
-# Load environment variables
-load_dotenv()
+# Load environment variables explicitly from the current directory
+env_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path=env_path)
 
 
 @dataclass
@@ -118,13 +119,33 @@ class DataRetrievalService:
         start_time = datetime.now()
         
         try:
-            # Generate embedding using Cohere
-            response = self.cohere_client.embed(
-                texts=[query_text],
-                model=model_name,
-                input_type="search_query"  # Using search_query as input type for queries
-            )
+            # Generate embedding using Cohere with retry logic for rate limits
+            max_retries = 5
+            response = None
             
+            for attempt in range(max_retries):
+                try:
+                    response = self.cohere_client.embed(
+                        texts=[query_text],
+                        model=model_name,
+                        input_type="search_query"
+                    )
+                    break
+                except Exception as e:
+                    error_msg = str(e)
+                    if "429" in error_msg or "Too Many Requests" in error_msg or "rate limit" in error_msg.lower():
+                        if attempt == max_retries - 1:
+                            raise
+                        import time
+                        wait_time = 2 * (2 ** attempt)
+                        logging.warning(f"Cohere rate limit hit. Retrying in {wait_time}s (Attempt {attempt + 1}/{max_retries})")
+                        time.sleep(wait_time)
+                    else:
+                        raise
+
+            if not response:
+                raise ValueError("Failed to get response from Cohere after retries")
+
             # Extract the embedding vector
             embedding_vector = response.embeddings[0]
             

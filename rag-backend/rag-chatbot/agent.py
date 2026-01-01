@@ -13,8 +13,9 @@ from dataclasses import dataclass
 from datetime import datetime
 from dotenv import load_dotenv
 
-# Load environment variables at the very beginning
-load_dotenv()
+# Load environment variables explicitly from the current directory
+env_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path=env_path)
 
 from agents import Agent, Runner, function_tool, OpenAIChatCompletionsModel
 from openai import AsyncOpenAI
@@ -210,7 +211,7 @@ class AIAgentService:
         When answering, please cite the source of your information.
         """
 
-    def retrieve_context(self, query: AgentQuery) -> RetrievedContext:
+    async def retrieve_context(self, query: AgentQuery) -> RetrievedContext:
         """
         Retrieve relevant context from Qdrant based on the agent query.
         
@@ -319,7 +320,7 @@ class AIAgentService:
         logging.info(f"Response validation completed with score: {grounding_score:.2f}")
         return validation_result
     
-    def generate_agent_response(self, query: AgentQuery) -> AgentResponse:
+    async def generate_agent_response(self, query: AgentQuery) -> AgentResponse:
         """
         Generate a response using the OpenAI agent based on the query.
 
@@ -337,11 +338,11 @@ class AIAgentService:
             # Pass the top_k from config to the tool call via kwargs if the SDK supports it
             # or rely on the agent to pass it if it learns it from instructions.
             # For now, we'll ensure the tool uses the config value.
-            result = Runner.run_sync(self.agent, query.query_text)
+            result = await Runner.run(self.agent, query.query_text)
             response_text = result.final_output
 
             # Since we're using the tool approach, we need to retrieve context for validation
-            retrieved_context = self.retrieve_context(query)
+            retrieved_context = await self.retrieve_context(query)
 
             # Validate that the response is grounded in the context
             validation_result = self.validate_response_grounding(response_text, retrieved_context)
@@ -405,7 +406,7 @@ class AIAgentService:
         
         return list(citations)
     
-    def run_query(self, query_text: str, context_scope: str = "full_book", selected_text_ref: str = None) -> AgentResponse:
+    async def run_query(self, query_text: str, context_scope: str = "full_book", selected_text_ref: str = None) -> AgentResponse:
         """
         Execute a complete query through the agent pipeline.
         
@@ -427,13 +428,13 @@ class AIAgentService:
         )
         
         # Generate response using the agent (the agent will handle context retrieval via tools)
-        agent_response = self.generate_agent_response(query)
+        agent_response = await self.generate_agent_response(query)
 
         logging.info(f"Complete query processed in {datetime.now() - start_time}")
         return agent_response
 
 
-def run_agent_query(query_text: str, context_scope: str = "full_book", selected_text_ref: str = None, agent_config: Dict[str, Any] = None) -> AgentResponse:
+async def run_agent_query(query_text: str, context_scope: str = "full_book", selected_text_ref: str = None, agent_config: Dict[str, Any] = None) -> AgentResponse:
     """
     Main function to run a query through the AI agent.
     
@@ -456,7 +457,7 @@ def run_agent_query(query_text: str, context_scope: str = "full_book", selected_
     agent_service = AIAgentService(config)
     
     # Run the query
-    response = agent_service.run_query(query_text, context_scope, selected_text_ref)
+    response = await agent_service.run_query(query_text, context_scope, selected_text_ref)
     
     return response
 
@@ -494,12 +495,12 @@ def main():
         }
         
         # Run the agent query
-        response = run_agent_query(
+        response = asyncio.run(run_agent_query(
             query_text=args.query,
             context_scope=args.context_scope,
             selected_text_ref=args.text_ref,
             agent_config=config
-        )
+        ))
         
         # Print the response
         print(f"\nQuery: {args.query}")

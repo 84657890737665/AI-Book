@@ -1,3 +1,0 @@
-runtime: python3.11
-requirements: requirements.txt
-app_file: app.py

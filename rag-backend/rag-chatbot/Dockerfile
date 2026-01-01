@@ -20,7 +20,7 @@ ENV HOME=/home/user \
     PATH=/home/user/.local/bin:$PATH
 
 # Expose port 7860 (Hugging Face Spaces default)
-EXPOSE 7860 , 8000
+EXPOSE 7860
 
 # Run the application
-CMD ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "7860", "8000"]
+CMD ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "7860"]
