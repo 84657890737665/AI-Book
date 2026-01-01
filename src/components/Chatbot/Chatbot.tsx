@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './Chatbot.module.css';
 
 const Chatbot = () => {
+  const { siteConfig } = useDocusaurusContext();
+  const chatbotApiUrl = (siteConfig.customFields?.chatbotApiUrl as string) || 'http://localhost:8000/query';
+
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<{id: number, text: string, sender: 'user' | 'bot'}[]>([
+  const [messages, setMessages] = useState<{ id: number, text: string, sender: 'user' | 'bot' }[]>([
     { id: 1, text: 'Hello! I\'m Tan, your AI Assistant for Physical AI & Humanoid Robotics. How can I help you today?', sender: 'bot' }
   ]);
   const [inputValue, setInputValue] = useState('');
@@ -62,14 +66,14 @@ const Chatbot = () => {
 
     try {
       // Call the backend API to get the response
-      const response = await fetch(process.env.REACT_APP_CHATBOT_API_URL || 'https://tan-ee320-chatbot.hf.space', {
+      const response = await fetch(chatbotApiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           query: query,
-          mode: 'FULL_BOOK', // Default mode
+          mode: selectedText ? 'SELECTED_TEXT' : 'FULL_BOOK',
           selected_text: selectedText // Send the selected text context
         })
       });
@@ -83,7 +87,7 @@ const Chatbot = () => {
       // Add bot response
       const botResponse = {
         id: messages.length + 2,
-        text: data.response,
+        text: data.response || "I'm sorry, I couldn't generate a response. Please try asking in a different way.",
         sender: 'bot' as const
       };
 

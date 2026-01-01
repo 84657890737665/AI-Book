@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './Chatbot.module.css';
 
 interface Message {
@@ -12,6 +13,9 @@ interface ContextAwareChatbotProps {
 }
 
 const ContextAwareChatbot: React.FC<ContextAwareChatbotProps> = ({ pageContext = '' }) => {
+  const { siteConfig } = useDocusaurusContext();
+  const chatbotApiUrl = (siteConfig.customFields?.chatbotApiUrl as string) || 'http://localhost:8000/query';
+
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { id: 1, text: 'Hello! I\'m Tan, your AI Assistant for Physical AI & Humanoid Robotics. How can I help you with this page?', sender: 'bot' }
@@ -64,14 +68,14 @@ const ContextAwareChatbot: React.FC<ContextAwareChatbotProps> = ({ pageContext =
 
     try {
       // Call the backend API to get the response
-      const response = await fetch(process.env.REACT_APP_CHATBOT_API_URL || 'https://tan-ee320-chatbot.hf.space', {
+      const response = await fetch(chatbotApiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           query: queryText, // Include selected text in the query
-          mode: 'FULL_BOOK', // Default mode
+          mode: selectedText ? 'SELECTED_TEXT' : 'FULL_BOOK',
           selected_text: selectedText,
           context: pageContext || null // Add page context if available
         })
@@ -86,7 +90,7 @@ const ContextAwareChatbot: React.FC<ContextAwareChatbotProps> = ({ pageContext =
       // Add bot response
       const botResponse: Message = {
         id: messages.length + 2,
-        text: data.response,
+        text: data.response || "I'm sorry, I couldn't generate a response. Please try asking in a different way.",
         sender: 'bot'
       };
 
@@ -124,8 +128,8 @@ const ContextAwareChatbot: React.FC<ContextAwareChatbotProps> = ({ pageContext =
     <>
       {/* Floating Chatbot Button */}
       {selectedText && (
-        <div 
-          className={styles.quickAskButton} 
+        <div
+          className={styles.quickAskButton}
           onClick={() => {
             setInputValue(`Ask about: "${selectedText}"`);
             setIsOpen(true);
@@ -135,7 +139,7 @@ const ContextAwareChatbot: React.FC<ContextAwareChatbotProps> = ({ pageContext =
           <span>💬 Ask about this</span>
         </div>
       )}
-      
+
       <div className={styles.chatbotButton} onClick={toggleChat}>
         <div className={styles.chatbotIcon}>
           <svg
